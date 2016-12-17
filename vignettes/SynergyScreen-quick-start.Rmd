@@ -60,8 +60,32 @@ Also a quote using `>`:
 # SynergyScreen Quick Start
 
 ## Generate design for a new screen
-Load a set of compounds
+The starting point is a CSV file listing compounds to be used in the screen. It should have 3 columns: compound, min.dose, and	max.dose. Here is an example:
+```{r see the compounds file}
+read.csv(system.file("extdata/8_compounds/8_compounds.csv", package = "SynergyScreen"))
+```
+
+Load compounds into a special object that will be used to initialize a new screen
 ```{r Load a set of compounds}
-compounds <- readCompoundFile(system.file("extdata/8_cpds_2/8_compounds_2.csv", package = "SynergyScreen"))
+compounds <- readCompoundFile(system.file("extdata/8_compounds/8_compounds.csv", package = "SynergyScreen"))
+```
+
+Initialize a new screen
+```{r Initialize a new screen}
+screen0 <- new("SynergyScreen", compound_list=compounds)
+```
+
+Generate screen design for 96-well plates
+```{r Generate screen design for 96-well plates}
+screen0 <- generateDesign(screen0, type="12 doses exp") 
+write.csv(design(screen0), file="8_compounds_design.csv", row.names=F)
+```
+
+## Analyze and visualize screen data
+First, load a design file and a file with screening data, e.g. ODs of plate wells
+```{r Read in the data}
+screen1 <- designFile2SynergyScreen(system.file("extdata/8_compounds_design_actually_used.csv", package = "SynergyScreen")) 
+OD.data <- readWideDataFlex(file = system.file("extdata/8_compounds_OD_data.csv", package = "SynergyScreen"), row = c(3,13,23,33,43,53), col = rep("G",6)) 
+raw_data(screen1) <- OD.data 
 ```
 
