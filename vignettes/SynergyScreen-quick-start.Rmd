@@ -84,8 +84,8 @@ write.csv(design(screen0), file="8_compounds_design.csv", row.names=F)
 ## Analyze and visualize screen data
 First, load a design file and a file with screening data, e.g. ODs of plate wells
 ```{r Read in the data}
-screen1 <- designFile2SynergyScreen(system.file("extdata/8_compounds_design_actually_used.csv", package = "SynergyScreen")) 
-OD.data <- readWideDataFlex(file = system.file("extdata/8_compounds_OD_data.csv", package = "SynergyScreen"), row = c(3,13,23,33,43,53), col = rep("G",6)) 
+screen1 <- designFile2SynergyScreen(system.file("extdata/8_compounds/8_compounds_design_actually_used.csv", package = "SynergyScreen")) 
+OD.data <- readWideDataFlex(file = system.file("extdata/8_compounds/8_compounds_OD_data.csv", package = "SynergyScreen"), row = c(3,13,23,33,43,53), col = rep("G",6)) 
 raw_data(screen1) <- OD.data 
 ```
 
