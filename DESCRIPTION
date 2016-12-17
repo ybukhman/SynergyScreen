@@ -1,0 +1,59 @@
+Package: SynergyScreen
+Type: Package
+Title: Analyze and simulate synergy screen data
+Version: 0.1.0
+Date: 2015-04-14
+Authors@R: person("Yury V", "Bukhman", email = "ybukhman@glbrc.wisc.edu",
+    role = c("aut", "cre"))
+Description: SynergyScreen works with data from medium-throughput synergy
+    screens where multiple pairs of compounds are tested in microtiter plates
+    using simple single ray design.
+License: Artistic-2.0
+LazyLoad: yes
+LazyData: yes
+Depends:
+    R (>= 3.1.3),
+    BiocGenerics (>= 0.12.1),
+    methods (>= 3.1.3),
+    ggplot2
+Imports:
+    RColorBrewer (>= 1.1-2),
+    scales,
+    reshape2
+Suggests:
+    BiocStyle (>= 1.4.1),
+    knitr (>= 1.9),
+    rmarkdown (>= 0.5.1),
+    testthat
+VignetteBuilder: knitr
+Collate:
+    'Compound.R'
+    'CompoundList.R'
+    'DRE.R'
+    'DRE-accessors.R'
+    'DREList.R'
+    'Model.R'
+    'DRModel.R'
+    'Functions.R'
+    'ScreenData.R'
+    'ScreenDesign.R'
+    'SynergyData.R'
+    'SynergyExperiment.R'
+    'SynergyExperimentList.R'
+    'SynergyScreen.R'
+    'SynergyScreen-accessors.R'
+    'checkRange.R'
+    'computeSynergies.R'
+    'datasetAnnotations.R'
+    'designSummary.R'
+    'dreData.R'
+    'findSynergies.R'
+    'fit.R'
+    'generateDesign.R'
+    'labelledData.R'
+    'plotIsoboles.R'
+    'predict.R'
+    'simulate.R'
+    'transferTrueValues.R'
+    'writeWide.R'
+RoxygenNote: 5.0.1

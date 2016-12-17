@@ -1,0 +1,89 @@
+###########################################
+#  Example: simulate a 15-compound screen #
+###########################################
+
+##  Stage 1: simulate individual compounds and their dose-response experiments
+# Load a set of compounds and initialize a SynergyScreen object
+cpds = readCompoundFile(system.file("extdata/15_cpds_simulation/compounds_1.csv",
+                                    package="SynergyScreen"))
+screen1 = new("SynergyScreen",compound_list=cpds)
+compound(screen1,"Cpd3")
+
+#  Generate screen design, only testing single compounds at first
+screen1 = generateDesign(screen1,pairs=FALSE)
+head(design(screen1), n=30)
+
+#  Simulate compound growth curve characteristics and raw dose-response data
+set.seed(20141120)
+screen1 = simulate(screen1)
+compound(screen1,"Cpd3")
+dre(screen1,"Cpd3")
+head(raw_data(screen1),n=30)
+head(labelledData(screen1,"raw"),n=30)
+boxplot(screen1,"raw")
+
+#  Normalize screen data, adjusting for plate bias
+screen1 = normalize(screen1)
+head(norm_data(screen1),n=30)
+head(labelledData(screen1,"norm"),n=30)
+boxplot(screen1,"norm")
+
+#  Check ranges of dose-response experiments
+screen1 = checkRange(screen1)
+
+## Stage 2: re-do dose-response experiments for which dose range checks failed, 
+## with corrected dose ranges
+#  Load the new set of compounds, initialize a SynergyScreen object and generate a design
+cpds2 = readCompoundFile(system.file("extdata/15_cpds_simulation/compounds_2.csv",
+                                     package="SynergyScreen"))
+screen2 = new("SynergyScreen",compound_list=cpds2)
+screen2 = generateDesign(screen2,pairs=FALSE)
+
+# Transfer previously simulated "true" IC50 and m values to compounds in screen2
+screen2 = transferTrueValues(screen1,screen2)
+compound(screen1,"Cpd1")
+compound(screen2,"Cpd1")
+
+#  Simulate dose-response data again
+set.seed(20141121)
+screen2 = simulate(screen2)
+screen2 = normalize(screen2)
+screen2 = checkRange(screen2)
+
+##  Stage 3. Full design with individual compounds and mixtures
+#  Load the new set of compounds, initialize a SynergyScreen object, generate a design, 
+#  and transfer previously simulated values
+cpds3 = readCompoundFile(system.file("extdata/15_cpds_simulation/compounds_3.csv",
+                                     package="SynergyScreen"))
+screen3 = new("SynergyScreen",compound_list=cpds3)
+screen3 = generateDesign(screen3)
+screen3 = transferTrueValues(screen1,screen3)
+
+#  Simulate dose-response characteristics of mixtures and dose-response data
+set.seed(20141125)
+screen3 = simulate(screen3)
+boxplot(screen3,"raw")
+screen3 = normalize(screen3)
+boxplot(screen3,"norm")
+screen3 = checkRange(screen3)
+
+#  Compute synergies
+screen3 = computeSynergies(screen3)
+head(synergy_data(screen3))
+plot(screen3)
+
+#  Find strong synergies and antagonisms
+findSynergies(screen3, statistic="max", threshold=0.5, direction="lower")
+findSynergies(screen3, statistic="min", threshold=2, direction="higher")
+
+#  Explore a pair of synergistic compounds
+plotIsoboles(screen3,"Cpd7-Cpd15",main="Cpd7-Cpd15")
+plot(dre(screen3,"Cpd7"),main="Cpd7")
+plot(dre(screen3,"Cpd15"),main="Cpd15")
+plot(dre(screen3,"Cpd7-Cpd15"),main="Cpd7-Cpd15")
+
+#  Explore a pair of antagonistic compounds
+plotIsoboles(screen3,"Cpd9-Cpd13",main="Cpd9-Cpd13")
+plot(dre(screen3,"Cpd9"),main="Cpd9")
+plot(dre(screen3,"Cpd13"),main="Cpd13")
+plot(dre(screen3,"Cpd9-Cpd13"),main="Cpd9-Cpd13")
