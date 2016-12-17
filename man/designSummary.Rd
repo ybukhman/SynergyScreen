@@ -4,37 +4,30 @@
 \name{designSummary}
 \alias{designSummary}
 \alias{designSummary,SynergyScreen-method}
-\title{Output a summary table for synergy screen design with exponential dose series.
- 
- The summary table simplifies setting up experiments in the lab by reporting dilution factors.
- 
- @param object object of appropriate class, i.e. \code{SynergyScreen}
- @param ... method-specific arguments: see below
- @param dilution.factor.decimals interger number of decimals in the dilution factor
- 
- @return Data frame describing dose-response experiments
- 
- @seealso \linkS4class{SynergyScreen}}
+\title{Output a summary table for synergy screen design with exponential dose series.}
 \usage{
 designSummary(object, ...)
 
 \S4method{designSummary}{SynergyScreen}(object, dilution.factor.decimals = 2)
 }
+\arguments{
+\item{object}{object of appropriate class, i.e. \code{SynergyScreen}}
+
+\item{...}{method-specific arguments: see below}
+
+\item{dilution.factor.decimals}{interger number of decimals in the dilution factor}
+}
+\value{
+Data frame describing dose-response experiments
+}
 \description{
-Output a summary table for synergy screen design with exponential dose series.
- 
- The summary table simplifies setting up experiments in the lab by reporting dilution factors.
- 
- @param object object of appropriate class, i.e. \code{SynergyScreen}
- @param ... method-specific arguments: see below
- @param dilution.factor.decimals interger number of decimals in the dilution factor
- 
- @return Data frame describing dose-response experiments
- 
- @seealso \linkS4class{SynergyScreen}
+The summary table simplifies setting up experiments in the lab by reporting dilution factors.
 }
 \section{Methods (by class)}{
 \itemize{
 \item \code{SynergyScreen}: 
 }}
+\seealso{
+\linkS4class{SynergyScreen}
+}
 

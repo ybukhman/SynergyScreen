@@ -3,18 +3,18 @@
 NULL
 
 #### designSummary generic ####
-#'  Output a summary table for synergy screen design with exponential dose series.
-#'  
-#'  The summary table simplifies setting up experiments in the lab by reporting dilution factors.
-#'  
-#'  @param object object of appropriate class, i.e. \code{SynergyScreen}
-#'  @param ... method-specific arguments: see below
-#'  @param dilution.factor.decimals interger number of decimals in the dilution factor
-#'  
-#'  @return Data frame describing dose-response experiments
-#'  
-#'  @seealso \linkS4class{SynergyScreen}
-#'  
+#' Output a summary table for synergy screen design with exponential dose series.
+#' 
+#' The summary table simplifies setting up experiments in the lab by reporting dilution factors.
+#' 
+#' @param object object of appropriate class, i.e. \code{SynergyScreen}
+#' @param ... method-specific arguments: see below
+#' @param dilution.factor.decimals interger number of decimals in the dilution factor
+#' 
+#' @return Data frame describing dose-response experiments
+#' 
+#' @seealso \linkS4class{SynergyScreen}
+#' 
 setGeneric("designSummary", function(object, ...) standardGeneric("designSummary"))
 
 #### Method for SynergyScreen ####
