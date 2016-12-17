@@ -87,7 +87,7 @@ screen0 <- generateDesign(screen0, type="12 doses exp")
 write.csv(design(screen0), file="8_compounds_design.csv", row.names=F)
 ```
 
-## Analyze and visualize screen data
+## Analyze screen data
 First, load a design file^[The difference between the auto-generated design and the design that was actually used was that controls were in rows G and H in the first and A and H in the second.] and a file with screening data, e.g. ODs of plate wells.
 ```{r Read in the data}
 screen1 <- designFile2SynergyScreen(system.file("extdata/8_compounds/8_compounds_design_actually_used.csv", package = "SynergyScreen")) 
@@ -101,9 +101,24 @@ screen1 <- normalize(screen1)
 screen1 <- computeSynergies(screen1) 
 ```
 
-Find synergies and antagonisms 
+Find synergies and antagonisms^[menls stands for "median effect non-linear least squares". It fits dose-response data using the median effect equation. Other options include "melm" and "loess". See vignette "Introduction to SynergyScreen" for details.]
 ```{r Find synergies and antagonisms}
 findSynergies(screen1, statistic="max", threshold=0.7, direction="lower") 
 findSynergies(screen1, statistic="min", threshold=1.5, direction="higher") 
 ```
 
+## Visualize screen data 
+Plot a dose-response experiment 
+```{r Plot a dose-response experiment}
+plot(dre(screen1,"Cpd_2")) 
+```
+
+Plot a isoboles for a pair of compounds 
+```{r Plot a isoboles for a pair of compounds}
+plotIsoboles(screen1, "Cpd_1-Cpd_4", effect=seq(0.1,0.7,by=0.1)) 
+```
+
+Plot a heat map of the interaction matrix 
+```{r Plot a heat map of the interaction matrix}
+plot(screen1) 
+```
