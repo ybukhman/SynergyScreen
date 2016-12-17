@@ -231,7 +231,7 @@ setMethod("plot",
             for (c in cpd) {
               if (sum(is.na(ii.matrix[c,])) == ncol(ii.matrix) - 1) {
                 ii.matrix <- ii.matrix[! rownames(ii.matrix) == c, ! colnames(ii.matrix) == c]
-                warning("No data for compound", c, "with effect", effect)
+                warning("No data for compound ", c, " with effect = ", effect)
               }
             }
             

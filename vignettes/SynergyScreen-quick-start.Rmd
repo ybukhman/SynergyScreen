@@ -61,7 +61,11 @@ Also a quote using `>`:
 
 # SynergyScreen Quick Start
 
-```{r attach SynergyScreen}
+```{r echo=FALSE}
+knitr::opts_chunk$set(fig.height=4, fig.width=6)
+```
+
+```{r attach SynergyScreen, message=FALSE}
 library(SynergyScreen)
 ```
 
@@ -86,7 +90,7 @@ Generate screen design for 96-well plates
 screen0 <- generateDesign(screen0, type="12 doses exp") 
 write.csv(design(screen0), file="8_compounds_design.csv", row.names=F)
 ```
-
+Ignore the warning given by `write.csv()`
 ## Analyze screen data
 First, load a design file^[The difference between the auto-generated design and the design that was actually used was that controls were in rows G and H in the first and A and H in the second.] and a file with screening data, e.g. ODs of plate wells.
 ```{r Read in the data}
@@ -108,17 +112,38 @@ findSynergies(screen1, statistic="min", threshold=1.5, direction="higher")
 ```
 
 ## Visualize screen data 
-Plot a dose-response experiment 
-```{r Plot a dose-response experiment}
-plot(dre(screen1,"Cpd_2")) 
-```
-
-Plot a isoboles for a pair of compounds 
-```{r Plot a isoboles for a pair of compounds}
-plotIsoboles(screen1, "Cpd_1-Cpd_4", effect=seq(0.1,0.7,by=0.1)) 
-```
-
 Plot a heat map of the interaction matrix 
 ```{r Plot a heat map of the interaction matrix}
 plot(screen1) 
 ```
+
+Note that the heat map does not show compounds 5, 6, and 7. This is because we do not have data for these compounds at 50% inhibition. See the warnings.
+```{r Show warnings}
+warnings()
+```
+
+Plot isoboles of synergistic compounds
+```{r Plot isoboles of synergistic compounds}
+plotIsoboles(screen1, "Cpd_3-Cpd_4")
+```
+
+Plot isoboles of antagonistic compounds
+```{r Plot isoboles of antagonistic compounds}
+plotIsoboles(screen1, "Cpd_1-Cpd_4", effect=seq(0.1,0.7,by=0.1)) 
+```
+
+Plot isoboles of non-interacting compounds
+```{r Plot isoboles of non-interacting compounds}
+plotIsoboles(screen1, "Cpd_2-Cpd_3")
+```
+
+Plot the dose-response curve of a compound that worked. Note the sigmoid shape, well modeled by the median effect equation.
+```{r Plot the dose-response curve of a compound that worked}
+plot(dre(screen1,"Cpd_2")) 
+```
+
+Plot the dose-response curve of a compound that did not work. Note the narrow response range. Next time, the experimenter may want to try a much wider dose range.
+```{r Plot the dose-response curve of a compound that did not work}
+plot(dre(screen1,"Cpd_6")) 
+```
+
