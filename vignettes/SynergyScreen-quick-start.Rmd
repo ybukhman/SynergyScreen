@@ -2,7 +2,9 @@
 title: "SynergyScreen Quick Start"
 author: "Yury V Bukhman"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette: fig_caption: yes
+output: 
+  rmarkdown::html_vignette: 
+    fig_caption: yes
 vignette: >
   %\VignetteIndexEntry{SynergyScreen Quick Start}
   %\VignetteEngine{knitr::rmarkdown}
@@ -59,6 +61,10 @@ Also a quote using `>`:
 
 # SynergyScreen Quick Start
 
+```{r attach SynergyScreen}
+library(SynergyScreen)
+```
+
 ## Generate design for a new screen
 The starting point is a CSV file listing compounds to be used in the screen. It should have 3 columns: compound, min.dose, and	max.dose. Here is an example:
 ```{r see the compounds file}
@@ -82,7 +88,7 @@ write.csv(design(screen0), file="8_compounds_design.csv", row.names=F)
 ```
 
 ## Analyze and visualize screen data
-First, load a design file and a file with screening data, e.g. ODs of plate wells
+First, load a design file^[The difference between auto-generated design and the design that was actually used is that controls are in rows G and H in the first and A and H in the second.] and a file with screening data, e.g. ODs of plate wells.
 ```{r Read in the data}
 screen1 <- designFile2SynergyScreen(system.file("extdata/8_compounds/8_compounds_design_actually_used.csv", package = "SynergyScreen")) 
 OD.data <- readWideDataFlex(file = system.file("extdata/8_compounds/8_compounds_OD_data.csv", package = "SynergyScreen"), row = c(3,13,23,33,43,53), col = rep("G",6)) 
