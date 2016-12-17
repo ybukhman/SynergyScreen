@@ -45,7 +45,7 @@ setGeneric("findSynergies", function(object, ...) standardGeneric("findSynergies
 setMethod("findSynergies", "SynergyScreen", 
           function (object, statistic, threshold, direction, model=NULL) {
             #  Debug
-            #  browser()
+            # browser()
             
             #  Filter by model
             data1 = synergy_data(object)
@@ -54,8 +54,11 @@ setMethod("findSynergies", "SynergyScreen",
               data1 = subset(data1, model == m1)
             }
             
+            # Drop NA values
+            data1 <- data1[is.finite(data1$interaction.index),]
+            
             #  Compute statistic for each experiment
-            expr = paste("with(data1,tapply(interaction.index,experiment,",statistic,",na.rm=T))",sep="")
+            expr = paste("with(data1,tapply(interaction.index,experiment,",statistic,"))",sep="")
             stats = eval(parse(text=expr))
             stats = stats[is.finite(stats)]
             

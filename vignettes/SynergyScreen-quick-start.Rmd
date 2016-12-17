@@ -88,10 +88,22 @@ write.csv(design(screen0), file="8_compounds_design.csv", row.names=F)
 ```
 
 ## Analyze and visualize screen data
-First, load a design file^[The difference between auto-generated design and the design that was actually used is that controls are in rows G and H in the first and A and H in the second.] and a file with screening data, e.g. ODs of plate wells.
+First, load a design file^[The difference between the auto-generated design and the design that was actually used was that controls were in rows G and H in the first and A and H in the second.] and a file with screening data, e.g. ODs of plate wells.
 ```{r Read in the data}
 screen1 <- designFile2SynergyScreen(system.file("extdata/8_compounds/8_compounds_design_actually_used.csv", package = "SynergyScreen")) 
 OD.data <- readWideDataFlex(file = system.file("extdata/8_compounds/8_compounds_OD_data.csv", package = "SynergyScreen"), row = c(3,13,23,33,43,53), col = rep("G",6)) 
 raw_data(screen1) <- OD.data 
+```
+
+Normalize and compute synergies 
+```{r Normalize and compute synergies}
+screen1 <- normalize(screen1) 
+screen1 <- computeSynergies(screen1) 
+```
+
+Find synergies and antagonisms 
+```{r Find synergies and antagonisms}
+findSynergies(screen1, statistic="max", threshold=0.7, direction="lower") 
+findSynergies(screen1, statistic="min", threshold=1.5, direction="higher") 
 ```
 
