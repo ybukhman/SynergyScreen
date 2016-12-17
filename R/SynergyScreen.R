@@ -227,6 +227,14 @@ setMethod("plot",
               ii.matrix[cpd2[i],cpd1[i]] <- ii[i]
             }
             
+            # - drop failed compounds
+            for (c in cpd) {
+              if (sum(is.na(ii.matrix[c,])) == ncol(ii.matrix) - 1) {
+                ii.matrix <- ii.matrix[! rownames(ii.matrix) == c, ! colnames(ii.matrix) == c]
+                warning("No data for compound", c, "with effect", effect)
+              }
+            }
+            
             # - cluster the matrix of log-transformed interaction index values
             log.matrix <- log2(ii.matrix)
             no.na.vals <- sum(is.na(log.matrix)) == 0
