@@ -42,6 +42,12 @@ write.csv(design(screen0), file="8_compounds_design.csv", row.names=F)
 ```
 Ignore the warning given by `write.csv()`
 
+Display dose-response experiments, their positions on the plate, maximal doses and serial dilution factors. 
+```{r designSummary}
+designSummary(screen0)
+```
+This helps the experimenter to set up the screen. The doses are in exponential series. A lower compound concentration is obtained by adding a specified amount of blank medium to a medium that has a higher concentration of the same compound. For example, if dilution factor = 0.1, get a lower concentration by adding 0.1 volume of blank medium to 1 volume of a medium with a higher concentration.
+
 ## Analyze screen data
 
 First, load a design file^[The difference between the auto-generated design and the design that was actually used was that controls were in rows G and H in the first and A and H in the second.] and a file with screening data, e.g. ODs of plate wells.
