@@ -4,7 +4,7 @@
 library(SynergyScreen)
 
 # initialize a new screen
-compounds = readCompoundFile(system.file("extdata/8_cpds_1/8_compounds_1.csv",package="SynergyScreen"))
+compounds = readCompoundFile(system.file("extdata/8_compounds/8_compounds.csv",package="SynergyScreen"))
 screen = new("SynergyScreen", compound_list=compounds)
 
 # test designSummary method for an exponential design type
