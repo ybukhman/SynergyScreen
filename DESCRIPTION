@@ -8,7 +8,7 @@ Authors@R: person("Yury V", "Bukhman", email = "ybukhman@glbrc.wisc.edu",
 Description: SynergyScreen works with data from medium-throughput synergy
     screens where multiple pairs of compounds are tested in microtiter plates
     using simple single ray design.
-License: Artistic-2.0
+License: file LICENSE
 LazyLoad: yes
 LazyData: yes
 Depends:

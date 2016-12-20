@@ -42,7 +42,7 @@ readCompoundFile <- function (file) {
 #' Design file is expected in "long" format.  It must contain the columns specified in \code{\linkS4class{ScreenDesign}}.
 #' 
 #' @examples
-#' screen1 = designFile2SynergyScreen(system.file("extdata/8_compounds/8_compounds_design_actually_used.csv", 
+#' screen1 <- designFile2SynergyScreen(system.file("extdata/8_compounds/8_compounds_design_actually_used.csv", 
 #'                                                package="SynergyScreen"))
 #' str(screen1)
 #' 

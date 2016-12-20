@@ -75,14 +75,6 @@ each well.
 This method also sets up dose-response experiment objects in object@dre_list 
 and synergy experiment objects in object@synergy_experiment_list
 }}
-\examples{
-compounds = readCompoundFile(system.file("extdata/8_cpds_1/8_compounds_1.csv",
-                                         package="SynergyScreen"))
-screen = new("SynergyScreen", compound_list=compounds)
-screen = generateDesign(screen, type="8 doses linear")
-design(screen)
-
-}
 \seealso{
 \code{\linkS4class{SynergyScreen}}, \code{\linkS4class{DREList}}, \code{\linkS4class{DRE}}, 
 \code{\linkS4class{SynergyExperimentList}}, \code{\linkS4class{SynergyExperiment}}

@@ -19,7 +19,7 @@ Read in a design file and build a SynergyScreen object from it
 This function creates a new SynergyScreen object and populates slots @design, @compound_list, @dre_list, and
 }
 \examples{
-screen1 = designFile2SynergyScreen(system.file("extdata/8_cpds_1/8_compounds_1_design.csv", 
+screen1 <- designFile2SynergyScreen(system.file("extdata/8_compounds/8_compounds_design_actually_used.csv", 
                                                package="SynergyScreen"))
 str(screen1)
 

@@ -21,5 +21,5 @@ test_that("designSummary method returns a data frame of expected format", {
   expect_true(all(design_sum$cpd2 %in% c(names(compound_list(screen)),NA)))
   expect_is(design_sum$cpd2_max_dose, "numeric")
   expect_is(design_sum$dilution_factor, "numeric")
-  expect_more_than(min(design_sum$dilution_factor),1)
+  expect_gt(min(design_sum$dilution_factor),1)
 })

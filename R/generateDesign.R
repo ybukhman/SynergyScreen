@@ -87,13 +87,6 @@ NULL
 #' The current implementation supports mixtures of no more than 2 compounds and no replicates.  However, 
 #' if replicates are desired, the user may simply run the same design more than once.
 #' 
-#' @examples
-#' compounds = readCompoundFile(system.file("extdata/8_cpds_1/8_compounds_1.csv",
-#'                                          package="SynergyScreen"))
-#' screen = new("SynergyScreen", compound_list=compounds)
-#' screen = generateDesign(screen, type="8 doses linear")
-#' design(screen)
-#' 
 #' @seealso \code{\linkS4class{SynergyScreen}}, \code{\linkS4class{DREList}}, \code{\linkS4class{DRE}}, 
 #' \code{\linkS4class{SynergyExperimentList}}, \code{\linkS4class{SynergyExperiment}}
 #' 

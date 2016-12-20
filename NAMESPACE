@@ -1,2 +1,6 @@
 exportPattern("^[[:alpha:]]+")
-import(BiocGenerics,RColorBrewer,methods)
+import(BiocGenerics,RColorBrewer,methods,ggplot2)
+importFrom("graphics", "abline", "legend", "lines", "par", "title")
+importFrom("stats", "as.dist", "as.formula", "coef", "hclust", "lm",
+             "loess", "nls", "rnorm", "runif")
+importFrom("utils", "read.csv", "read.table", "write.table")
