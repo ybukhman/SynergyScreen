@@ -36,11 +36,11 @@ then writes it out to a file in CSV format
 \item \code{ScreenDesign}: Write out screen design data in a wide format
 }}
 \examples{
-compounds = readCompoundFile(system.file("extdata/8_cpds_1/8_compounds_1.csv",
+compounds = readCompoundFile(system.file("extdata/8_compounds/8_compounds.csv",
                                          package="SynergyScreen"))
 screen = new("SynergyScreen", compound_list=compounds)
-screen = generateDesign(screen, type="8 doses linear")
-writeWide(design(screen), file="8_compounds_1_design_wide.csv")
+screen = generateDesign(screen, type="12 doses exp")
+writeWide(design(screen), file="8_compounds_design_wide.csv")
 
 }
 \seealso{
